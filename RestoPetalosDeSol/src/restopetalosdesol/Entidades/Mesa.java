@@ -4,43 +4,32 @@
  */
 package restopetalosdesol.Entidades;
 
-import java.util.ArrayList;
-
 /**
  *
  * @author RODRI
  */
 public class Mesa {
+    
     private int idMesa;
-    
-    private ArrayList <Reserva> reserva; //Fijarse si es necesario esta arraylist o directamente en un metodo en DataBase
+    private int numero;
+    private boolean estado;
     private int capacidad;
-    private boolean ocupada;
-    private boolean atendida;
     
-    
+
     public Mesa() {
     }
 
-    public Mesa(int idMesa, Mesero mesero, ArrayList<Reserva> reserva, int capacidad, boolean ocupada, boolean atendida) {
-        this.idMesa = idMesa;
-        
-        this.reserva = reserva;
+    public Mesa(int numero, boolean estado, int capacidad) {
+        this.numero = numero;
+        this.estado = estado;
         this.capacidad = capacidad;
-        this.ocupada = ocupada;
-        this.atendida = atendida;
     }
 
-    public Mesa(Mesero mesero, ArrayList<Reserva> reserva, int capacidad, boolean ocupada, boolean atendida) {
-        
-        this.reserva = reserva;
-        this.capacidad = capacidad;
-        this.ocupada = ocupada;
-        this.atendida = atendida;
-    }
-
-    public Mesa(int idMesa) {
+    public Mesa(int idMesa, int numero, boolean estado, int capacidad) {
         this.idMesa = idMesa;
+        this.numero = numero;
+        this.estado = estado;
+        this.capacidad = capacidad;
     }
 
     public int getIdMesa() {
@@ -51,47 +40,32 @@ public class Mesa {
         this.idMesa = idMesa;
     }
 
-    public int getCantidad() {
+    public int getNumero() {
+        return numero;
+    }
+
+    public void setNumero(int numero) {
+        this.numero = numero;
+    }
+
+    public boolean isEstado() {
+        return estado;
+    }
+
+    public void setEstado(boolean estado) {
+        this.estado = estado;
+    }
+
+    public int getCapacidad() {
         return capacidad;
     }
 
-    public void setCantidad(int capacidad) {
+    public void setCapacidad(int capacidad) {
         this.capacidad = capacidad;
     }
 
-    public boolean isOcupada() {
-        return ocupada;
-    }
-
-    public void setOcupada(boolean ocupada) {
-        this.ocupada = ocupada;
-    }
-
-    public boolean isAtendida() {
-        return atendida;
-    }
-
-    public void setAtendida(boolean atendida) {
-        this.atendida = atendida;
-    }
-
-    public ArrayList<Reserva> getReserva() {
-        return reserva;
-    }
-
-    public void setReserva(ArrayList<Reserva> reserva) {
-        this.reserva = reserva;
-    }
-
-    
-
-    
-
     @Override
     public String toString() {
-        return "Mesa{" + "idMesa=" + idMesa + ", capacidad=" + capacidad + ", ocupada=" + ocupada + ", atendida=" + atendida + ", reserva=" + reserva + '}';
-    }
-    
-    
-    
+        return "mesa{" + "idMesa=" + idMesa + ", numero=" + numero + ", estado=" + estado + ", capacidad=" + capacidad + '}';
+    }          
 }

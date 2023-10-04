@@ -9,75 +9,36 @@ package restopetalosdesol.Entidades;
  * @author RODRI
  */
 public class Producto {
-    private int idProducto;
+    private int idproducto;
     private String nombre;
-    private String descripcion;
-    private int stock;
     private double precio;
-    private boolean tipo;
-    private boolean conAlcohol;
-    private String tipoComida;
-    private boolean pago;
-    
+    private int stock;
+    private boolean estado;
 
     public Producto() {
     }
 
-    public Producto(int idProducto, String nombre, String descripcion, int stock, double precio, boolean tipo, boolean conAlcohol, String tipoComida, boolean pago) {
-        this.idProducto = idProducto;
+    public Producto(String nombre, double precio, int stock, boolean estado) {
         this.nombre = nombre;
-        this.descripcion = descripcion;
-        this.stock = stock;
         this.precio = precio;
-        this.tipo = tipo;
-        this.conAlcohol = conAlcohol;
-        this.tipoComida = tipoComida;
-        this.pago = pago;
-        
+        this.stock = stock;
+        this.estado = estado;
     }
 
-    public Producto(String nombre, String descripcion, int stock, double precio, boolean tipo, boolean conAlcohol, String tipoComida, boolean pago) {
+    public Producto(int idproducto, String nombre, double precio, int stock, boolean estado) {
+        this.idproducto = idproducto;
         this.nombre = nombre;
-        this.descripcion = descripcion;
-        this.stock = stock;
         this.precio = precio;
-        this.tipo = tipo;
-        this.conAlcohol = conAlcohol;
-        this.tipoComida = tipoComida;
-        this.pago = pago;
-        
-    }
-
-    public Producto(String nombre, String descripcion, int stock, double precio, boolean tipo, String tipoComida, boolean pago) {
-        this.nombre = nombre;
-        this.descripcion = descripcion;
         this.stock = stock;
-        this.precio = precio;
-        this.tipo = tipo;
-        this.tipoComida = tipoComida;
-        this.pago = pago;
-       
-    }
-    
-    //Para agregar cualquier tipo de producto, sin boolean y sin tipo de comida.
-    
-
-    public Producto(String nombre, String descripcion, int stock, double precio) {
-        this.nombre = nombre;
-        this.descripcion = descripcion;
-        this.stock = stock;
-        this.precio = precio;
-        this.tipo = tipo;
-        this.conAlcohol = conAlcohol;
+        this.estado = estado;
     }
 
-    
-    public int getIdProducto() {
-        return idProducto;
+    public int getIdproducto() {
+        return idproducto;
     }
 
-    public void setIdProducto(int idProducto) {
-        this.idProducto = idProducto;
+    public void setIdproducto(int idproducto) {
+        this.idproducto = idproducto;
     }
 
     public String getNombre() {
@@ -88,12 +49,12 @@ public class Producto {
         this.nombre = nombre;
     }
 
-    public String getDescripcion() {
-        return descripcion;
+    public double getPrecio() {
+        return precio;
     }
 
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
+    public void setPrecio(double precio) {
+        this.precio = precio;
     }
 
     public int getStock() {
@@ -104,53 +65,16 @@ public class Producto {
         this.stock = stock;
     }
 
-    public double getPrecio() {
-        return precio;
+    public boolean isEstado() {
+        return estado;
     }
 
-    public void setPrecio(double precio) {
-        this.precio = precio;
+    public void setEstado(boolean estado) {
+        this.estado = estado;
     }
-
-    public boolean isTipo() {
-        return tipo;
-    }
-
-    public void setTipo(boolean tipo) {
-        this.tipo = tipo;
-    }
-
-    public boolean isConAlcohol() {
-        return conAlcohol;
-    }
-
-    public void setConAlcohol(boolean conAlcohol) {
-        this.conAlcohol = conAlcohol;
-    }
-
-    public String getTipoComida() {
-        return tipoComida;
-    }
-
-    public void setTipoComida(String tipoComida) {
-        this.tipoComida = tipoComida;
-    }
-
-    public boolean isPago() {
-        return pago;
-    }
-
-    public void setPago(boolean pago) {
-        this.pago = pago;
-    }
-
-   
 
     @Override
     public String toString() {
-        return "Producto{" + "idProducto=" + idProducto + ", nombre=" + nombre + ", descripcion=" + descripcion + ", stock=" + stock + ", precio=" + precio + ", tipo=" + tipo + ", conAlcohol=" + conAlcohol + ", tipoComida=" + tipoComida + ", pago=" + pago + '}';
-    }
-    
-    
-    
+        return "productos{" + "idproducto=" + idproducto + ", nombre=" + nombre + ", precio=" + precio + ", stock=" + stock + ", estado=" + estado + '}';
+    }   
 }
