@@ -1,52 +1,49 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package restopetalosdesol.Entidades;
 
-/**
- *
- * @author RODRI
- */
 public class Producto {
-    private int idproducto;
-    private String nombre;
+
+    private int idProducto;
+    private String nombreProducto;
     private double precio;
     private int stock;
     private boolean estado;
 
+    
     public Producto() {
     }
 
-    public Producto(String nombre, double precio, int stock, boolean estado) {
-        this.nombre = nombre;
+    
+    public Producto(int idProducto, String nombreProducto, double precio, int stock, boolean estado) {
+        this.idProducto = idProducto;
+        this.nombreProducto = nombreProducto;
         this.precio = precio;
         this.stock = stock;
         this.estado = estado;
+        
     }
 
-    public Producto(int idproducto, String nombre, double precio, int stock, boolean estado) {
-        this.idproducto = idproducto;
-        this.nombre = nombre;
+    public Producto(String nombreProducto, double precio, int stock, boolean estado) {
+        this.nombreProducto = nombreProducto;
         this.precio = precio;
         this.stock = stock;
         this.estado = estado;
+        
     }
 
-    public int getIdproducto() {
-        return idproducto;
+    public int getIdProducto() {
+        return idProducto;
     }
 
-    public void setIdproducto(int idproducto) {
-        this.idproducto = idproducto;
+    public void setIdProducto(int idProducto) {
+        this.idProducto = idProducto;
     }
 
-    public String getNombre() {
-        return nombre;
+    public String getNombreProducto() {
+        return nombreProducto;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public void setNombreProducto(String nombreProducto) {
+        this.nombreProducto = nombreProducto;
     }
 
     public double getPrecio() {
@@ -75,6 +72,7 @@ public class Producto {
 
     @Override
     public String toString() {
-        return "productos{" + "idproducto=" + idproducto + ", nombre=" + nombre + ", precio=" + precio + ", stock=" + stock + ", estado=" + estado + '}';
-    }   
+        return "Producto{" + "idProducto=" + idProducto + ", nombreProducto=" + nombreProducto + ", precio=" + precio + ", stock=" + stock + ", estado=" + estado + '}';
+    }
+
 }
