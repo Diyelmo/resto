@@ -12,27 +12,29 @@ import java.util.ArrayList;
  */
 public class Mesa {
     private int idMesa;
-    private Mesero mesero;
+    
     private ArrayList <Reserva> reserva; //Fijarse si es necesario esta arraylist o directamente en un metodo en DataBase
-    private int cantidad;
+    private int capacidad;
     private boolean ocupada;
     private boolean atendida;
+    
+    
     public Mesa() {
     }
 
-    public Mesa(int idMesa, Mesero mesero, ArrayList<Reserva> reserva, int cantidad, boolean ocupada, boolean atendida) {
+    public Mesa(int idMesa, Mesero mesero, ArrayList<Reserva> reserva, int capacidad, boolean ocupada, boolean atendida) {
         this.idMesa = idMesa;
-        this.mesero = mesero;
+        
         this.reserva = reserva;
-        this.cantidad = cantidad;
+        this.capacidad = capacidad;
         this.ocupada = ocupada;
         this.atendida = atendida;
     }
 
-    public Mesa(Mesero mesero, ArrayList<Reserva> reserva, int cantidad, boolean ocupada, boolean atendida) {
-        this.mesero = mesero;
+    public Mesa(Mesero mesero, ArrayList<Reserva> reserva, int capacidad, boolean ocupada, boolean atendida) {
+        
         this.reserva = reserva;
-        this.cantidad = cantidad;
+        this.capacidad = capacidad;
         this.ocupada = ocupada;
         this.atendida = atendida;
     }
@@ -40,17 +42,6 @@ public class Mesa {
     public Mesa(int idMesa) {
         this.idMesa = idMesa;
     }
-    
-
-    public Mesero getMesero() {
-        return mesero;
-    }
-
-    public void setMesero(Mesero mesero) {
-        this.mesero = mesero;
-    }
-
-    
 
     public int getIdMesa() {
         return idMesa;
@@ -61,11 +52,11 @@ public class Mesa {
     }
 
     public int getCantidad() {
-        return cantidad;
+        return capacidad;
     }
 
-    public void setCantidad(int cantidad) {
-        this.cantidad = cantidad;
+    public void setCantidad(int capacidad) {
+        this.capacidad = capacidad;
     }
 
     public boolean isOcupada() {
@@ -98,7 +89,7 @@ public class Mesa {
 
     @Override
     public String toString() {
-        return "Mesa{" + "idMesa=" + idMesa + ", cantidad=" + cantidad + ", ocupada=" + ocupada + ", atendida=" + atendida + ", reserva=" + reserva + '}';
+        return "Mesa{" + "idMesa=" + idMesa + ", capacidad=" + capacidad + ", ocupada=" + ocupada + ", atendida=" + atendida + ", reserva=" + reserva + '}';
     }
     
     
