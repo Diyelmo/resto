@@ -1,12 +1,19 @@
 package restopetalosdesol.DataBase;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import restopetalosdesol.Entidades.Producto;
+import restopetalosdesol.Entidades.PedidoProd;
+import restopetalosdesol.Entidades.Pedido;
 
 public class ProductoDataBase {
 
@@ -165,5 +172,52 @@ public class ProductoDataBase {
 
         }
     }
+
+    public void actualizararStock(Producto p) {
+        String sql = "UPDATE producto SET stock = ? WHERE idProducto= ?";
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, p.getStock());
+            ps.setInt(2, p.getIdProducto());
+            int exito = ps.executeUpdate();
+
+            if (exito == 1) {
+                JOptionPane.showMessageDialog(null, "Stock actualizado");
+            }
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla producto" + ex.getMessage());
+        }
+    }
+
+    public List<Producto> listarPraductos() {
+        String sql = "SELECT * FROM producto";
+        List<Producto> productos = new ArrayList<Producto>();
+
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                Producto prod = new Producto();
+                prod.setIdProducto(rs.getInt("idProducto"));
+                prod.setNombreProducto(rs.getString("nombreProducto"));
+                prod.setPrecio(rs.getDouble("precio"));
+                prod.setStock(rs.getInt("stock"));
+                prod.setEstado(true);
+                
+                productos.add(prod);
+            }
+            ps.close();
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla producto" + ex.getMessage());
+        }
+        return productos;
+
+    }
+    
+    
 
 }
