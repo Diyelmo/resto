@@ -15,21 +15,27 @@ public class PedidoProd {
     private Pedido idPedido;
     private Producto idProducto;
     private int cantidad;
+    private double subtotal;
+    private boolean estado;
 
     public PedidoProd() {
     }
 
-    public PedidoProd(Pedido idPedido, Producto idProducto, int cantidad) {
+    public PedidoProd(Pedido idPedido, Producto idProducto, int cantidad, double subtotal, boolean estado) {
         this.idPedido = idPedido;
         this.idProducto = idProducto;
         this.cantidad = cantidad;
+        this.subtotal = subtotal;
+        this.estado = estado;
     }
 
-    public PedidoProd(int idPedidoProd, Pedido idPedido, Producto idProducto, int cantidad) {
+    public PedidoProd(int idPedidoProd, Pedido idPedido, Producto idProducto, int cantidad, double subtotal, boolean estado) {
         this.idPedidoProd = idPedidoProd;
         this.idPedido = idPedido;
         this.idProducto = idProducto;
         this.cantidad = cantidad;
+        this.subtotal = subtotal;
+        this.estado = estado;
     }
 
     public int getIdPedidoProd() {
@@ -62,6 +68,22 @@ public class PedidoProd {
 
     public void setCantidad(int cantidad) {
         this.cantidad = cantidad;
+    }
+
+    public double getSubtotal() {
+        return subtotal;
+    }
+
+    public void setSubtotal(double subtotal) {
+        this.subtotal = subtotal;
+    }
+
+    public boolean isEstado() {
+        return estado;
+    }
+
+    public void setEstado(boolean estado) {
+        this.estado = estado;
     }
 
     @Override

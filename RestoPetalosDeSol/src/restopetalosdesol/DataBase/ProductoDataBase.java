@@ -24,7 +24,7 @@ public class ProductoDataBase {
         con = Conexion.getConexion();
     }
 
-    public void agregarProductoEntrada(Producto p) {
+    public void agregarProducto(Producto p) {
         String sql = "INSERT INTO producto ( idProducto, nombreProducto, precio, stock, estado) "
                 + "VALUES (?,?,?,?,?);";
 
@@ -53,123 +53,43 @@ public class ProductoDataBase {
         }
     }
 
-    public void agregarProductoPostre(Producto p) {
-        String sql = "INSERT INTO producto ( idProducto, nombreProducto, precio, stock, estado) "
-                + "VALUES (?,?,?,?,?);";
-
-        try {
-            PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-
-            ps.setInt(1, p.getIdProducto());
-            ps.setString(2, p.getNombreProducto());
-            ps.setDouble(3, p.getPrecio());
-            ps.setInt(4, p.getStock());
-            ps.setBoolean(5, p.isEstado());
-
-            ps.executeUpdate();
-
-            ResultSet rs = ps.getGeneratedKeys();
-
+    public Producto buscarProducto(int id){
+        String sql="select * from producto where idProducto=? ";
+        Producto p=null;
+        try {           
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery();
             if (rs.next()) {
-                p.setIdProducto(rs.getInt(1));
-                JOptionPane.showMessageDialog(null, "Producto añadido con exito");
+                
+                p=new Producto();
+                p.setIdProducto(rs.getInt("idProducto"));
+                p.setNombreProducto(rs.getString("nombreProducto"));
+                p.setPrecio(rs.getDouble("precio"));
+                p.setStock(rs.getInt("stock"));
+                p.setEstado(rs.getBoolean("estado"));
+                
+            }else{
+                JOptionPane.showMessageDialog(null, " No existe ese Producto.");
             }
-
             ps.close();
-
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Producto  " + ex.getMessage());
-
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, " Error al acceder a la tabla Producto "+e.getMessage());
         }
+        return p;
     }
-
-    public void agregarProductoBebidaSinAlcohol(Producto p) {
-        String sql = "INSERT INTO producto ( idProducto, nombreProducto, precio, stock, estado) "
-                + "VALUES (?,?,?,?,?);";
-
-        try {
-            PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-
-            ps.setInt(1, p.getIdProducto());
-            ps.setString(2, p.getNombreProducto());
-            ps.setDouble(3, p.getPrecio());
-            ps.setInt(4, p.getStock());
-            ps.setBoolean(5, p.isEstado());
-
-            ps.executeUpdate();
-
-            ResultSet rs = ps.getGeneratedKeys();
-
-            if (rs.next()) {
-                p.setIdProducto(rs.getInt(1));
-                JOptionPane.showMessageDialog(null, "Producto añadido con exito");
+    
+    public void eliminarProducto(int id) {
+        String sql = "UPDATE producto SET estado = 0 WHERE idProducto = ? ";
+        try {           
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, id);
+            int exito = ps.executeUpdate();
+            if (exito == 1) {
+                JOptionPane.showMessageDialog(null, " Se eliminó el producto.");
             }
-
-            ps.close();
-
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Producto  " + ex.getMessage());
-
-        }
-    }
-
-    public void agregarProductoPrincipal(Producto p) {
-        String sql = "INSERT INTO producto ( idProducto, nombreProducto, precio, stock, estado) "
-                + "VALUES (?,?,?,?,?);";
-
-        try {
-            PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-
-            ps.setInt(1, p.getIdProducto());
-            ps.setString(2, p.getNombreProducto());
-            ps.setDouble(3, p.getPrecio());
-            ps.setInt(4, p.getStock());
-            ps.setBoolean(5, p.isEstado());
-
-            ps.executeUpdate();
-
-            ResultSet rs = ps.getGeneratedKeys();
-
-            if (rs.next()) {
-                p.setIdProducto(rs.getInt(1));
-                JOptionPane.showMessageDialog(null, "Producto añadido con exito");
-            }
-
-            ps.close();
-
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Producto  " + ex.getMessage());
-
-        }
-    }
-
-    public void agregarBebidaConAlcohol(Producto p) {
-        String sql = "INSERT INTO producto ( idProducto, nombreProducto, precio, stock, estado) "
-                + "VALUES (?,?,?,?,?);";
-
-        try {
-            PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-
-            ps.setInt(1, p.getIdProducto());
-            ps.setString(2, p.getNombreProducto());
-            ps.setDouble(3, p.getPrecio());
-            ps.setInt(4, p.getStock());
-            ps.setBoolean(5, p.isEstado());
-
-            ps.executeUpdate();
-
-            ResultSet rs = ps.getGeneratedKeys();
-
-            if (rs.next()) {
-                p.setIdProducto(rs.getInt(1));
-                JOptionPane.showMessageDialog(null, "Producto añadido con exito");
-            }
-
-            ps.close();
-
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Producto  " + ex.getMessage());
-
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, " Error al acceder a la tabla Producto");
         }
     }
 
@@ -190,7 +110,7 @@ public class ProductoDataBase {
         }
     }
 
-    public List<Producto> listarPraductos() {
+    public List<Producto> listarProductos() {
         String sql = "SELECT * FROM producto";
         List<Producto> productos = new ArrayList<Producto>();
 
@@ -217,7 +137,4 @@ public class ProductoDataBase {
         return productos;
 
     }
-    
-    
-
 }
