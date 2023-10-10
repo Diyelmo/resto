@@ -93,12 +93,12 @@ public class ProductoDataBase {
         }
     }
 
-    public void actualizararStock(Producto p) {
+    public void actualizararStock(int s ,int p) {
         String sql = "UPDATE producto SET stock = ? WHERE idProducto= ?";
         try {
             PreparedStatement ps = con.prepareStatement(sql);
-            ps.setInt(1, p.getStock());
-            ps.setInt(2, p.getIdProducto());
+            ps.setInt(1, s);
+            ps.setInt(2, p);
             int exito = ps.executeUpdate();
 
             if (exito == 1) {

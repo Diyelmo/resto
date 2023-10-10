@@ -134,23 +134,24 @@ public class menuproducto extends javax.swing.JInternalFrame {
                                 .addComponent(jLabel7)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 609, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(174, 174, 174)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel3)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel1)
-                                .addGap(5, 5, 5)))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 609, Short.MAX_VALUE))
+                                .addGap(231, 231, 231)
+                                .addComponent(jLabel1))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(230, 230, 230)
+                                .addComponent(jLabel3)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1)
                 .addGap(8, 8, 8)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
                     .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -189,9 +190,7 @@ public class menuproducto extends javax.swing.JInternalFrame {
                         PedidoProd pp = new PedidoProd(pe, produ, cant, sub, true);
                         ppd.guardarPedido(pp);
                         int stock = produ.getStock() - cant;
-                        prod.modificarStock(stock, produ.getIdProducto());
-                        double im = pe.getImporte() + sub;
-                        ped.ObtenerImporte(pe.getIdpedido(), im);
+                        prod.actualizararStock(stock, produ.getIdProducto());
                         jcantidad.setText(""+0);
                         jttotal.setText(""+0);
                         borrarlista();
@@ -240,7 +239,7 @@ public class menuproducto extends javax.swing.JInternalFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
-    private javax.swing.JComboBox<pedido> jComboBox1;
+    private javax.swing.JComboBox<Pedido> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -263,7 +262,7 @@ public class menuproducto extends javax.swing.JInternalFrame {
 
     private void llenarTabla() {
         ProductoDataBase pd=new ProductoDataBase();
-        for (Producto p : pd.listarProducto()) {
+        for (Producto p : pd.listarProductos()) {
             modelo.addRow(new Object[]{
                 p.getIdProducto(),p.getNombreProducto(),p.getPrecio(),p.getStock(),p.isEstado()});
         }

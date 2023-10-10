@@ -9,8 +9,12 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JOptionPane;
+import restopetalosdesol.Entidades.Pedido;
 import restopetalosdesol.Entidades.PedidoProd;
+import restopetalosdesol.Entidades.Producto;
 
 /**
  *
@@ -18,6 +22,8 @@ import restopetalosdesol.Entidades.PedidoProd;
  */
 public class PedidoProdDataBase { 
     private Connection con=null;
+    private PedidoDataBase pd=new PedidoDataBase();
+    private ProductoDataBase pro=new ProductoDataBase();
     
     public PedidoProdDataBase(){
         con=Conexion.getConexion();
@@ -43,6 +49,48 @@ public class PedidoProdDataBase {
         ps.close();
         }catch(SQLException ex){
             JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Pedido");
+        }
+    }
+    
+    public List<PedidoProd> obtenerLista(int id){
+        List<PedidoProd> ppd = new ArrayList<PedidoProd>();
+        String sql = "SELECT * "
+                + "FROM `pedidoproducto` "
+                + "WHERE pedidoproducto.idPedido=? AND estado=1";
+        try {          
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, id);
+            ResultSet rs=ps.executeQuery();
+            while (rs.next()) {
+                PedidoProd ppdb=new PedidoProd();
+                ppdb.setIdPedidoProd(rs.getInt("idPedido_Prod"));
+                Pedido p= pd.buscarPedido(id);
+                ppdb.setIdPedido(p);
+                Producto produ=pro.buscarProducto(rs.getInt("idProducto"));
+                ppdb.setIdProducto(produ);
+                ppdb.setCantidad(rs.getInt("cantidad"));
+                ppdb.setSubtotal(rs.getDouble("subtotal"));
+                ppdb.setEstado(rs.getBoolean("estado"));
+                ppd.add(ppdb);
+            }
+            ps.close();
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, " Error al acceder a la tabla Alumno");
+        }
+        return ppd;
+    }
+    
+    public void cancelarPedido(int id) {
+        String sql = "UPDATE pedidoProducto SET estado = 0 WHERE idPedido_Prod = ? ";
+        try {           
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, id);
+            int exito = ps.executeUpdate();
+            if (exito == 1) {
+                JOptionPane.showMessageDialog(null, " Se eliminó el pedido.");
+            }
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, " Error al acceder a la tabla PedidoProducto");
         }
     }
 }
