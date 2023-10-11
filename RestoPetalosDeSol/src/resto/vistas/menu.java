@@ -70,6 +70,11 @@ public class menu extends javax.swing.JFrame {
         jMenu3.add(jMenuItem5);
 
         jMenuItem6.setText("Listar Pedidos Realizados Por Mesa");
+        jMenuItem6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem6ActionPerformed(evt);
+            }
+        });
         jMenu3.add(jMenuItem6);
 
         jMenuBar1.add(jMenu3);
@@ -98,6 +103,15 @@ public class menu extends javax.swing.JFrame {
         escritorio.add(ventanaInterna);
         escritorio.moveToFront(ventanaInterna);
     }//GEN-LAST:event_jMenuItem4ActionPerformed
+
+    private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
+       escritorio.removeAll();
+        escritorio.repaint();
+        listarPedidoPorMesaYH ventanaInterna= new listarPedidoPorMesaYH();
+        ventanaInterna.setVisible(true);
+        escritorio.add(ventanaInterna);
+        escritorio.moveToFront(ventanaInterna);
+    }//GEN-LAST:event_jMenuItem6ActionPerformed
 
     /**
      * @param args the command line arguments
