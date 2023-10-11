@@ -123,4 +123,98 @@ public class PedidoDataBase {
         }
         return p;
     }
+    
+    public Pedido buscarPedidoPorNombre(String nom){
+        String sql="select * from pedido where nombre_mesero LIKE '%"+nom+"%' ";
+        Pedido p=null;
+        try {           
+            PreparedStatement ps = con.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                
+                p=new Pedido();
+                p.setIdpedido(rs.getInt("idPedido"));
+                Mesa m= md.buscarMesa(rs.getInt("idMesa"));
+                p.setIdmesa(m);
+                p.setNombre(rs.getString("nombre_mesero"));
+                p.setFecha(rs.getDate("fecha").toLocalDate());
+                p.setHora(rs.getTime("hora").toLocalTime());
+                p.setImporte(rs.getDouble("importe"));
+                p.setCobrada(rs.getBoolean("cobrada"));
+                
+            }else{
+                JOptionPane.showMessageDialog(null, " No existe ese Producto.");
+            }
+            ps.close();
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, " Error al acceder a la tabla Producto");
+        }
+        return p;
+    }
+    
+    public List<Pedido> listarXMesero(String x){
+        String sql="select * from pedido where nombre_mesero LIKE '%"+x+"%' ";
+        ArrayList<Pedido> p=new ArrayList<>();
+        try {           
+            PreparedStatement ps = con.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                
+                Pedido pe=new Pedido();
+                pe.setIdpedido(rs.getInt("idPedido"));
+                Mesa m= md.buscarMesa(rs.getInt("idMesa"));
+                pe.setIdmesa(m);
+                pe.setNombre(rs.getString("nombre_mesero"));
+                pe.setFecha(rs.getDate("fecha").toLocalDate());
+                pe.setHora(rs.getTime("hora").toLocalTime());
+                pe.setImporte(rs.getDouble("importe"));
+                pe.setCobrada(rs.getBoolean("cobrada"));
+                p.add(pe);
+            }
+            ps.close();
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, " Error al acceder a la tabla Pedido "+e.getMessage());
+        }
+        return p;
+    }
+    
+    public List<Pedido> listarXDia(String x){
+        String sql="select * from pedido where nombre_mesero LIKE '%"+x+"%' AND cobrada=1";
+        ArrayList<Pedido> p=new ArrayList<>();
+        try {           
+            PreparedStatement ps = con.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                
+                Pedido pe=new Pedido();
+                pe.setIdpedido(rs.getInt("idPedido"));
+                Mesa m= md.buscarMesa(rs.getInt("idMesa"));
+                pe.setIdmesa(m);
+                pe.setNombre(rs.getString("nombre_mesero"));
+                pe.setFecha(rs.getDate("fecha").toLocalDate());
+                pe.setHora(rs.getTime("hora").toLocalTime());
+                pe.setImporte(rs.getDouble("importe"));
+                pe.setCobrada(rs.getBoolean("cobrada"));
+                p.add(pe);
+            }
+            ps.close();
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, " Error al acceder a la tabla Pedido "+e.getMessage());
+        }
+        return p;
+    }
+    
+    public void CobrarPedido(int id) {
+        String sql = "UPDATE pedido SET cobrada = 1 WHERE idPedido = ? ";
+        try {           
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, id);
+            int exito = ps.executeUpdate();
+            if (exito == 1) {
+                JOptionPane.showMessageDialog(null, "Cobrado");
+            }
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, " Error al acceder a la tabla pedido");
+        }
+    }
 }
