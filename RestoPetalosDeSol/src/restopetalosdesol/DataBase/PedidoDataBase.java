@@ -124,34 +124,6 @@ public class PedidoDataBase {
         return p;
     }
     
-    public Pedido buscarPedidoPorNombre(String nom){
-        String sql="select * from pedido where nombre_mesero LIKE '%"+nom+"%' ";
-        Pedido p=null;
-        try {           
-            PreparedStatement ps = con.prepareStatement(sql);
-            ResultSet rs = ps.executeQuery();
-            if (rs.next()) {
-                
-                p=new Pedido();
-                p.setIdpedido(rs.getInt("idPedido"));
-                Mesa m= md.buscarMesa(rs.getInt("idMesa"));
-                p.setIdmesa(m);
-                p.setNombre(rs.getString("nombre_mesero"));
-                p.setFecha(rs.getDate("fecha").toLocalDate());
-                p.setHora(rs.getTime("hora").toLocalTime());
-                p.setImporte(rs.getDouble("importe"));
-                p.setCobrada(rs.getBoolean("cobrada"));
-                
-            }else{
-                JOptionPane.showMessageDialog(null, " No existe ese Producto.");
-            }
-            ps.close();
-        } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, " Error al acceder a la tabla Producto");
-        }
-        return p;
-    }
-    
     public List<Pedido> listarXMesero(String x){
         String sql="select * from pedido where nombre_mesero LIKE '%"+x+"%' ";
         ArrayList<Pedido> p=new ArrayList<>();

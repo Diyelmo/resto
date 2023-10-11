@@ -142,10 +142,13 @@ private PedidoDataBase pd;
             SimpleDateFormat f = new SimpleDateFormat("dd-MM-yyyy");
             String fech = f.format(jDateChooser1.getDate());
             LocalDate fechan = LocalDate.parse(fech, DateTimeFormatter.ofPattern("dd-MM-yyyy"));
-            Pedido p = pd.buscarPedidoPorNombre((String) jTextField1.getText());
             int dia = fechan.getDayOfMonth();
-            if (dia == p.getFecha().getDayOfMonth()) {                
-                llenarTabla();
+            String x = jTextField1.getText();
+            for (Pedido p : pd.listarXDia(x)) {
+                if (dia == p.getFecha().getDayOfMonth()) {
+                    modelo.addRow(new Object[]{
+                    p.getIdpedido(), p.getIdmesa().getIdMesa(), p.getNombre(), p.getFecha(), p.getHora(), p.getImporte(), p.isCobrada()});
+                }
             }
         } catch (NullPointerException ex) {
             JOptionPane.showMessageDialog(this, "vacio");
@@ -186,13 +189,5 @@ private PedidoDataBase pd;
             for(int i=a;i>=0;i--){
              modelo.removeRow(i);
             }
-    }
-    private void llenarTabla() {
-        PedidoDataBase pd=new PedidoDataBase();
-        String x=jTextField1.getText();
-        for (Pedido p : pd.listarXDia(x)) {
-            modelo.addRow(new Object[]{
-                p.getIdpedido(),p.getIdmesa().getIdMesa(),p.getNombre(),p.getFecha(),p.getHora(),p.getImporte(),p.isCobrada()});
-        }
     }
 }
