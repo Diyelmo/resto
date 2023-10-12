@@ -176,13 +176,17 @@ public class mesas extends javax.swing.JInternalFrame {
             String fech=f.format(jDateChooser1.getDate());
             LocalDate fecha= LocalDate.parse(fech,DateTimeFormatter.ofPattern("dd-MM-yyyy"));
             LocalTime hora=LocalTime.parse(jthora.getText());
-            if(m.isEstado()==false){
-                Pedido p=new Pedido(m,mesero,fecha,hora,0,false);
-                pd.guardarPedido(p);
-                int id=m.getIdMesa();
-                md.OcuparMesa(id);
+            if (hora.isAfter( LocalTime.of(7, 59)) && hora.isBefore(LocalTime.of(23, 59))) {
+                if (m.isEstado() == false) {
+                    Pedido p = new Pedido(m, mesero, fecha, hora, 0, false);
+                    pd.guardarPedido(p);
+                    int id = m.getIdMesa();
+                    md.OcuparMesa(id);
+                } else {
+                    JOptionPane.showMessageDialog(this, "La mesa esta ocupada");
+                }
             }else{
-                JOptionPane.showMessageDialog(this, "La mesa esta ocupada");
+                JOptionPane.showMessageDialog(this, "Elige un horario entre las 8 y las 24 Hs");
             }
             borrarlista();
             llenarTabla();
