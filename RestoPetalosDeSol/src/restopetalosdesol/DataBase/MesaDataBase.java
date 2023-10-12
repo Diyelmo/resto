@@ -96,7 +96,7 @@ public class MesaDataBase {
     }
     
     public void OcuparMesa(int numero){ 
-        String sql="update mesa set estado=1"
+        String sql="update mesa set estado=1 "
                 + "where numero=? ";
         try{
         PreparedStatement ps=con.prepareStatement(sql);
@@ -110,7 +110,7 @@ public class MesaDataBase {
         }
     }
     public void LiberarMesa(int numero){ 
-        String sql="update mesa set estado=0"
+        String sql="update mesa set estado=0 "
                 + "where numero=? ";
         try{
         PreparedStatement ps=con.prepareStatement(sql);

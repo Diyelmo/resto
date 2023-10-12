@@ -98,7 +98,7 @@ public class PedidoDataBase {
     }
     
     public List<Pedido> listarPedido(){
-        String sql="select * from pedido ";
+        String sql="select * from pedido where cobrada=0";
         ArrayList<Pedido> p=new ArrayList<>();
         try {           
             PreparedStatement ps = con.prepareStatement(sql);
