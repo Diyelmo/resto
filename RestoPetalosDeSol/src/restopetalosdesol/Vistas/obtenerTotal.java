@@ -236,7 +236,7 @@ public class obtenerTotal extends javax.swing.JInternalFrame {
     }
     private void comboBox(){
         PedidoDataBase pd= new PedidoDataBase();
-        for (Pedido p : pd.listarPedido()) {
+        for (Pedido p : pd.listarPedido2()) {
             jComboBox1.addItem(p);
         }
     }

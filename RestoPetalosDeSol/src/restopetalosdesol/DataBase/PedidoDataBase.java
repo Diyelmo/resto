@@ -98,7 +98,7 @@ public class PedidoDataBase {
     }
     
     public List<Pedido> listarPedido(){
-        String sql="select * from pedido where cobrada=0";
+        String sql="select * from pedido ";
         ArrayList<Pedido> p=new ArrayList<>();
         try {           
             PreparedStatement ps = con.prepareStatement(sql);
@@ -188,5 +188,31 @@ public class PedidoDataBase {
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, " Error al acceder a la tabla pedido");
         }
+    }
+    public List<Pedido> listarPedido2(){
+        String sql="select * from pedido where cobrada = 0";
+        ArrayList<Pedido> p=new ArrayList<>();
+        try {           
+            PreparedStatement ps = con.prepareStatement(sql);
+
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                
+                Pedido pe=new Pedido();
+                pe.setIdpedido(rs.getInt("idPedido"));
+                Mesa m= md.buscarMesa(rs.getInt("idMesa"));
+                pe.setIdmesa(m);
+                pe.setNombre(rs.getString("nombre_mesero"));
+                pe.setFecha(rs.getDate("fecha").toLocalDate());
+                pe.setHora(rs.getTime("hora").toLocalTime());
+                pe.setImporte(rs.getDouble("importe"));
+                pe.setCobrada(rs.getBoolean("cobrada"));
+                p.add(pe);
+            }
+            ps.close();
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, " Error al acceder a la tabla Pedido "+e.getMessage());
+        }
+        return p;
     }
 }

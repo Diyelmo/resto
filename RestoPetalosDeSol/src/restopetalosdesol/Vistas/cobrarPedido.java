@@ -171,7 +171,7 @@ private void modificarTabla(){
     }
     private void llenarTabla() {
         PedidoDataBase pd=new PedidoDataBase();
-        for (Pedido p : pd.listarPedido()) {
+        for (Pedido p : pd.listarPedido2()) {
             modelo.addRow(new Object[]{
                 p.getIdpedido(),p.getIdmesa().getIdMesa(),p.getNombre(),p.getFecha(),p.getHora(),p.getImporte(),p.isCobrada()});
         }
