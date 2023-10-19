@@ -52,7 +52,7 @@ private PedidoDataBase pd;
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
 
-        jLabel1.setText("Lista de pedidos que cobró un mesero en particular en el día.");
+        jLabel1.setText("Pedidos cobrado por meseros en el dia");
 
         jLabel2.setText("ingrese mesero:");
 
@@ -93,7 +93,6 @@ private PedidoDataBase pd;
                 .addGap(16, 16, 16)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel2)
@@ -101,8 +100,11 @@ private PedidoDataBase pd;
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 331, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(28, Short.MAX_VALUE))
+                            .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(88, 88, 88)
+                        .addComponent(jLabel1)))
+                .addContainerGap(49, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButton2)
@@ -113,9 +115,9 @@ private PedidoDataBase pd;
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(12, 12, 12)
                 .addComponent(jLabel1)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -147,7 +149,7 @@ private PedidoDataBase pd;
             for (Pedido p : pd.listarXDia(x)) {
                 if (dia == p.getFecha().getDayOfMonth()) {
                     modelo.addRow(new Object[]{
-                    p.getIdpedido(), p.getIdmesa().getIdMesa(), p.getNombre(), p.getFecha(), p.getHora(), p.getImporte(), p.isCobrada()});
+                    p.getIdpedido(), p.getIdmesa().getNumero(), p.getNombre(), p.getFecha(), p.getHora(), p.getImporte(), p.isCobrada()});
                 }
             }
         } catch (NullPointerException ex) {
@@ -176,7 +178,7 @@ private PedidoDataBase pd;
     // End of variables declaration//GEN-END:variables
     private void modificarTabla(){
         modelo.addColumn("IDPedido");
-        modelo.addColumn("IDMesa");
+        modelo.addColumn("Nr Mesa");
         modelo.addColumn("nombre");
         modelo.addColumn("fecha");
         modelo.addColumn("hora");

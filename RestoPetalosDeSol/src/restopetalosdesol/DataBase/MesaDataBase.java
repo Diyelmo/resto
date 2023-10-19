@@ -103,7 +103,7 @@ public class MesaDataBase {
         ps.setDouble(1, numero);
         int exito= ps.executeUpdate();        
         if(exito==1){
-            JOptionPane.showMessageDialog(null, "mesa ocupada");
+            //JOptionPane.showMessageDialog(null, "mesa ocupada");
         }        
         }catch(SQLException ex){
             JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Mesa");
@@ -117,7 +117,7 @@ public class MesaDataBase {
         ps.setDouble(1, numero);
         int exito= ps.executeUpdate();        
         if(exito==1){
-            JOptionPane.showMessageDialog(null, "mesa desocupada");
+            //JOptionPane.showMessageDialog(null, "mesa desocupada");
         }        
         }catch(SQLException ex){
             JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Mesa");

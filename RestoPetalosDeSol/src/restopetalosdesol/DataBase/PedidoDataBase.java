@@ -90,7 +90,7 @@ public class PedidoDataBase {
             ps.setInt(2, id);
             int exito = ps.executeUpdate();
             if (exito == 1) {
-                JOptionPane.showMessageDialog(null, " Se obtuvo el importe.");
+                //JOptionPane.showMessageDialog(null, " Se obtuvo el importe.");
             }
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, " Error al acceder a la tabla pedido");

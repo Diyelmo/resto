@@ -102,7 +102,7 @@ public class ProductoDataBase {
             int exito = ps.executeUpdate();
 
             if (exito == 1) {
-                JOptionPane.showMessageDialog(null, "Stock actualizado");
+                //JOptionPane.showMessageDialog(null, "Stock actualizado");
             }
 
         } catch (SQLException ex) {

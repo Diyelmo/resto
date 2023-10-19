@@ -186,7 +186,7 @@ private DefaultTableModel modelo= new DefaultTableModel(){
         for (Pedido pd : data.listarPedido()) {
            
             if( localDate.equals(pd.getFecha())){
-                modelo.addRow(new Object[]{pd.getIdpedido(),pd.getIdmesa(),pd.getNombre(),pd.getFecha(),pd.getHora(),pd.getImporte(),pd.isCobrada()});
+                modelo.addRow(new Object[]{pd.getIdpedido(),pd.getIdmesa().getNumero(),pd.getNombre(),pd.getFecha(),pd.getHora(),pd.getImporte(),pd.isCobrada()});
              
                 control++;
             
@@ -255,7 +255,7 @@ private DefaultTableModel modelo= new DefaultTableModel(){
 public void cabecera(){
         ArrayList<Object> col=new ArrayList();
         col.add("IdPedido");
-        col.add("Idmesa");
+        col.add("Nr Mesa");
         col.add("Nombre");
         col.add("Fecha");
         col.add("Hora");

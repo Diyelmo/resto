@@ -145,7 +145,7 @@ public class ListaXMesero extends javax.swing.JInternalFrame {
 
     private void modificarTabla(){
         modelo.addColumn("IDPedido");
-        modelo.addColumn("IDMesa");
+        modelo.addColumn("Nr Mesa");
         modelo.addColumn("nombre");
         modelo.addColumn("fecha");
         modelo.addColumn("hora");
@@ -164,7 +164,7 @@ public class ListaXMesero extends javax.swing.JInternalFrame {
         String x=jTextField1.getText();
         for (Pedido p : pd.listarXMesero(x)) {
             modelo.addRow(new Object[]{
-                p.getIdpedido(),p.getIdmesa().getIdMesa(),p.getNombre(),p.getFecha(),p.getHora(),p.getImporte(),p.isCobrada()});
+                p.getIdpedido(),p.getIdmesa().getNumero(),p.getNombre(),p.getFecha(),p.getHora(),p.getImporte(),p.isCobrada()});
         }
     }
 }

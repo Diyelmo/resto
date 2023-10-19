@@ -52,8 +52,10 @@
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
                                       <Component id="jtmesero" alignment="0" min="-2" pref="314" max="-2" attributes="0"/>
-                                      <Component id="jDateChooser1" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jthora" alignment="0" min="-2" pref="124" max="-2" attributes="0"/>
+                                      <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
+                                          <Component id="jthora" alignment="0" max="32767" attributes="0"/>
+                                          <Component id="jDateChooser1" alignment="0" pref="215" max="32767" attributes="0"/>
+                                      </Group>
                                   </Group>
                                   <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
                               </Group>
@@ -159,6 +161,9 @@
           </Events>
         </Component>
         <Component class="com.toedter.calendar.JDateChooser" name="jDateChooser1">
+          <Properties>
+            <Property name="enabled" type="boolean" value="false"/>
+          </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel2">
           <Properties>

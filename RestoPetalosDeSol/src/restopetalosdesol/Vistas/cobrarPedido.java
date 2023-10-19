@@ -155,7 +155,7 @@ private MesaDataBase md;
     // End of variables declaration//GEN-END:variables
 private void modificarTabla(){
         modelo.addColumn("IDPedido");
-        modelo.addColumn("IDMesa");
+        modelo.addColumn("Nr Mesa");
         modelo.addColumn("nombre");
         modelo.addColumn("fecha");
         modelo.addColumn("hora");
@@ -173,7 +173,7 @@ private void modificarTabla(){
         PedidoDataBase pd=new PedidoDataBase();
         for (Pedido p : pd.listarPedido2()) {
             modelo.addRow(new Object[]{
-                p.getIdpedido(),p.getIdmesa().getIdMesa(),p.getNombre(),p.getFecha(),p.getHora(),p.getImporte(),p.isCobrada()});
+                p.getIdpedido(),p.getIdmesa().getNumero(),p.getNombre(),p.getFecha(),p.getHora(),p.getImporte(),p.isCobrada()});
         }
     }
 }
