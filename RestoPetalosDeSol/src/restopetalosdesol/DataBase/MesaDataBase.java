@@ -8,6 +8,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -40,7 +41,7 @@ public class MesaDataBase {
                 m.setCapacidad(rs.getInt("capacidad"));
                 
             }else{
-                JOptionPane.showMessageDialog(null, " No existe esa mesa.");
+                //JOptionPane.showMessageDialog(null, " No existe esa mesa.");
             }
             ps.close();
         } catch (SQLException e) {
@@ -119,6 +120,27 @@ public class MesaDataBase {
         if(exito==1){
             //JOptionPane.showMessageDialog(null, "mesa desocupada");
         }        
+        }catch(SQLException ex){
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Mesa");
+        }
+    }
+    
+    public void guardarMesa(Mesa m){  
+        String sql="insert into mesa(numero,estado,capacidad) "
+                + "values(?,?,?)";
+        try{
+        PreparedStatement ps=con.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);
+        ps.setInt(1, m.getNumero());
+        ps.setBoolean(2,m.isEstado());
+        ps.setInt(3, m.getCapacidad());
+        ps.executeUpdate();
+        
+        ResultSet rs=ps.getGeneratedKeys();
+        if(rs.next()){
+            m.setIdMesa(rs.getInt(1));
+            JOptionPane.showMessageDialog(null, "Mesa Guardada");
+        }
+        ps.close();
         }catch(SQLException ex){
             JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Mesa");
         }
