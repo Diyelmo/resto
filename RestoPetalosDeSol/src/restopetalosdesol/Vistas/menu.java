@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
+
 package restopetalosdesol.Vistas;
 
 import java.awt.Graphics;
@@ -9,13 +6,11 @@ import java.awt.Image;
 import java.awt.Graphics;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
-import resto.vistas.listarPedidoPorMesaYH;
-import resto.vistas.listarPedidosPF;
 
 
 public class menu extends javax.swing.JFrame {
 
-   // Fondo fondo = new Fondo();
+   
 
     public menu() {
         initComponents();

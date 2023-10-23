@@ -48,7 +48,7 @@ public class PedidoProdDataBase {
         }
         ps.close();
         }catch(SQLException ex){
-            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Pedido");
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Pedido Producto");
         }
     }
     
@@ -63,7 +63,7 @@ public class PedidoProdDataBase {
             ResultSet rs=ps.executeQuery();
             while (rs.next()) {
                 PedidoProd ppdb=new PedidoProd();
-                ppdb.setIdPedidoProd(rs.getInt("idPedido_Prod"));
+                ppdb.setIdPedidoProd(rs.getInt("idPedidoProd"));
                 Pedido p= pd.buscarPedido(id);
                 ppdb.setIdPedido(p);
                 Producto produ=pro.buscarProducto(rs.getInt("idProducto"));
@@ -75,7 +75,7 @@ public class PedidoProdDataBase {
             }
             ps.close();
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, " Error al acceder a la tabla Alumno");
+            JOptionPane.showMessageDialog(null, " Error al acceder a la tabla Pedido Producto");
         }
         return ppd;
     }

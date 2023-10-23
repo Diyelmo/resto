@@ -28,7 +28,9 @@ public class MesaDataBase {
     public Mesa buscarMesa(int numero){
         String sql="select * from mesa where numero=? ";
         Mesa m=null;
-        try {           
+        try { 
+            
+            
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setInt(1, numero);
             ResultSet rs = ps.executeQuery();
