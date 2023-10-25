@@ -413,7 +413,7 @@ public class menuproducto extends javax.swing.JInternalFrame {
         String t;
         ProductoDataBase pd=new ProductoDataBase();
         for (Producto p : pd.listarProductos()) {
-            if(p.isEstado()){
+            if(p.isEstado() && p.getStock()!=0){
                 t="Disponible";
             }else{
                 t="No disponible";
