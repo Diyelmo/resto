@@ -18,6 +18,7 @@ import restopetalosdesol.DataBase.PedidoDataBase;
 import restopetalosdesol.Entidades.Mesa;
 import restopetalosdesol.Entidades.Pedido;
 import java.time.ZoneId;
+import java.util.Calendar;
 import java.util.Date;
 
 /**
@@ -47,6 +48,9 @@ public class mesas extends javax.swing.JInternalFrame {
         ZoneId defaultZoneId = ZoneId.systemDefault();
             Date date = Date.from(LocalDate.now().atStartOfDay(defaultZoneId).toInstant());
             jDateChooser1.setDate(date);
+        Calendar Cal= Calendar.getInstance();
+        String fec= Cal.get(Cal.HOUR_OF_DAY)+":"+Cal.get(Cal.MINUTE)+":"+Cal.get(Cal.SECOND);
+        jthora.setText(fec);
     }
 
     /**
@@ -100,6 +104,7 @@ public class mesas extends javax.swing.JInternalFrame {
 
         jthora.setBackground(new java.awt.Color(204, 204, 204));
         jthora.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, java.awt.Color.white, null, null, java.awt.Color.black));
+        jthora.setEnabled(false);
 
         jButton1.setBackground(new java.awt.Color(0, 0, 0));
         jButton1.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
@@ -187,7 +192,7 @@ public class mesas extends javax.swing.JInternalFrame {
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel3)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(12, Short.MAX_VALUE))
         );
 
         jPanel6.setBackground(new java.awt.Color(204, 204, 204));
@@ -269,7 +274,7 @@ public class mesas extends javax.swing.JInternalFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(31, 31, 31)
@@ -309,7 +314,7 @@ public class mesas extends javax.swing.JInternalFrame {
             //SimpleDateFormat f=new SimpleDateFormat("dd-MM-yyyy");
             //String fech=f.format(jDateChooser1.getDate());
             LocalDate fecha= LocalDate.now();
-            LocalTime hora=LocalTime.parse(jthora.getText());
+            LocalTime hora=LocalTime.now();
             if (hora.isAfter( LocalTime.of(7, 59)) && hora.isBefore(LocalTime.of(23, 59))) {
                 if (m.isEstado() == false) {
                     Pedido p = new Pedido(m, mesero, fecha, hora, 0, false);
