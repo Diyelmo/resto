@@ -173,11 +173,11 @@ private MesaDataBase md;
             if(fila!=-1){
                 int id=(int)modelo.getValueAt(fila, 0);
                 Pedido p=pd.buscarPedido(id);
-                if(p.isCobrada()==false){
+                if(p.getImporte()>0){
                     pd.CobrarPedido(id);
                     md.LiberarMesa(p.getIdmesa().getIdMesa());
                 }else{
-                    JOptionPane.showMessageDialog(this, "El pedido ya se cobro");
+                    JOptionPane.showMessageDialog(this, "Primero debes obtener el precio total del pedido ");
                 }
             }else{
                 JOptionPane.showMessageDialog(this, "seleccione un pedido");

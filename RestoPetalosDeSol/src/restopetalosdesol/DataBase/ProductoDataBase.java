@@ -111,7 +111,7 @@ public class ProductoDataBase {
     }
 
     public List<Producto> listarProductos() {
-        String sql = "SELECT * FROM producto";
+        String sql = "SELECT * FROM producto where estado=1 ";
         List<Producto> productos = new ArrayList<Producto>();
 
         try {
@@ -125,7 +125,7 @@ public class ProductoDataBase {
                 prod.setNombreProducto(rs.getString("nombreProducto"));
                 prod.setPrecio(rs.getDouble("precio"));
                 prod.setStock(rs.getInt("stock"));
-                prod.setEstado(true);
+                prod.setEstado(rs.getBoolean("estado"));
                 
                 productos.add(prod);
             }

@@ -314,8 +314,8 @@ public class mesas extends javax.swing.JInternalFrame {
                 if (m.isEstado() == false) {
                     Pedido p = new Pedido(m, mesero, fecha, hora, 0, false);
                     pd.guardarPedido(p);
-                    int id = m.getIdMesa();
-                    md.OcuparMesa(id);
+                    int num = m.getNumero();
+                    md.OcuparMesa(num);
                 } else {
                     JOptionPane.showMessageDialog(this, "La mesa esta ocupada");
                 }
@@ -369,10 +369,16 @@ public class mesas extends javax.swing.JInternalFrame {
     }
     private void llenarTabla() {
         borrarlista();
+        String t;
         MesaDataBase md=new MesaDataBase();
         for (Mesa m : md.listarMesas()) {
+            if(m.isEstado()){
+                t="Ocupado";
+            }else{
+                t="Libre";
+            }
             modelo.addRow(new Object[]{
-                m.getIdMesa(), m.getNumero(), m.isEstado(), m.getCapacidad()});
+                m.getIdMesa(), m.getNumero(), t, m.getCapacidad()});
         }
     }
 }

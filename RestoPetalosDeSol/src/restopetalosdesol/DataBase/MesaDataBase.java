@@ -147,4 +147,30 @@ public class MesaDataBase {
             JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Mesa");
         }
     }
+    public Mesa buscarIDMesa(int id){
+        String sql="select * from mesa where idMesa=? ";
+        Mesa m=null;
+        try { 
+            
+            
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                
+                m=new Mesa();
+                m.setIdMesa(id);
+                m.setNumero(rs.getInt("numero"));
+                m.setEstado(rs.getBoolean("estado"));
+                m.setCapacidad(rs.getInt("capacidad"));
+                
+            }else{
+                //JOptionPane.showMessageDialog(null, " No existe esa mesa.");
+            }
+            ps.close();
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, " Error al acceder a la tabla Mesa");
+        }
+        return m;
+    }
 }

@@ -90,7 +90,7 @@ public class PedidoDataBase {
             ps.setInt(2, id);
             int exito = ps.executeUpdate();
             if (exito == 1) {
-                //JOptionPane.showMessageDialog(null, " Se obtuvo el importe.");
+                JOptionPane.showMessageDialog(null, " Se obtuvo el importe.");
             }
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, " Error al acceder a la tabla pedido");
@@ -108,7 +108,7 @@ public class PedidoDataBase {
                 
                 Pedido pe=new Pedido();
                 pe.setIdpedido(rs.getInt("idPedido"));
-                Mesa m= md.buscarMesa(rs.getInt("idMesa"));
+                Mesa m= md.buscarIDMesa(rs.getInt("idMesa"));
                 pe.setIdmesa(m);
                 pe.setNombre(rs.getString("nombre_mesero"));
                 pe.setFecha(rs.getDate("fecha").toLocalDate());
@@ -134,7 +134,7 @@ public class PedidoDataBase {
                 
                 Pedido pe=new Pedido();
                 pe.setIdpedido(rs.getInt("idPedido"));
-                Mesa m= md.buscarMesa(rs.getInt("idMesa"));
+                Mesa m= md.buscarIDMesa(rs.getInt("idMesa"));
                 pe.setIdmesa(m);
                 pe.setNombre(rs.getString("nombre_mesero"));
                 pe.setFecha(rs.getDate("fecha").toLocalDate());
@@ -160,7 +160,7 @@ public class PedidoDataBase {
                 
                 Pedido pe=new Pedido();
                 pe.setIdpedido(rs.getInt("idPedido"));
-                Mesa m= md.buscarMesa(rs.getInt("idMesa"));
+                Mesa m= md.buscarIDMesa(rs.getInt("idMesa"));
                 pe.setIdmesa(m);
                 pe.setNombre(rs.getString("nombre_mesero"));
                 pe.setFecha(rs.getDate("fecha").toLocalDate());
@@ -200,7 +200,7 @@ public class PedidoDataBase {
                 
                 Pedido pe=new Pedido();
                 pe.setIdpedido(rs.getInt("idPedido"));
-                Mesa m= md.buscarMesa(rs.getInt("idMesa"));
+                Mesa m= md.buscarIDMesa(rs.getInt("idMesa"));
                 pe.setIdmesa(m);
                 pe.setNombre(rs.getString("nombre_mesero"));
                 pe.setFecha(rs.getDate("fecha").toLocalDate());

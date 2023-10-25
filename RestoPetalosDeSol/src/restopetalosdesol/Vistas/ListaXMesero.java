@@ -19,6 +19,7 @@ public class ListaXMesero extends javax.swing.JInternalFrame {
         initComponents();
         modificarTabla();
         borrarlista();
+        LlenarTabla();
     }
 
     
@@ -155,4 +156,10 @@ public class ListaXMesero extends javax.swing.JInternalFrame {
                 p.getIdpedido(),p.getIdmesa().getNumero(),p.getNombre(),p.getFecha(),p.getHora(),p.getImporte(),p.isCobrada()});
         }
     }
+    public void LlenarTabla(){
+          PedidoDataBase p=new PedidoDataBase();
+          for (Pedido o: p.listarPedido()) {
+                modelo.addRow(new Object[]{o.getIdpedido(),o.getIdmesa().getNumero(),o.getNombre(),o.getFecha(),o.getHora(),o.getImporte(),o.isCobrada()});
+            }
+      }
 }

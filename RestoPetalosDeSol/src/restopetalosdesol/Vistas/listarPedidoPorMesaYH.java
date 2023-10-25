@@ -34,6 +34,7 @@ private DefaultTableModel modelo= new DefaultTableModel(){
     public listarPedidoPorMesaYH() {
         initComponents();
         cabecera();
+        LlenarTabla();
     }
 
     /**
@@ -183,7 +184,7 @@ private DefaultTableModel modelo= new DefaultTableModel(){
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        borrarlista();
+        
         try{
         LocalTime horLlegada=LocalTime.parse(jtLlegada.getText());
         LocalTime horSalida=LocalTime.parse(jtSalida.getText());
@@ -196,7 +197,7 @@ private DefaultTableModel modelo= new DefaultTableModel(){
         pedido.setHora(horLlegada);
         PedidoDataBase p=new PedidoDataBase();
         
-        
+        borrarlista();
         for (Pedido o: p.listarPedido()) {
             if(o.getIdmesa().getNumero()==nMesa && o.getFecha().equals(d)){
             if(o.getHora().equals(pedido.getHora())|| o.getHora().isAfter(pedido.getHora()) && o.getHora().isBefore(horSalida)  ) {
@@ -210,8 +211,9 @@ private DefaultTableModel modelo= new DefaultTableModel(){
             JOptionPane.showMessageDialog(this, "Recuerde que las horas deben completarse con el siguiente formato hh:mm:ss ");
         } catch(NumberFormatException e){
             JOptionPane.showMessageDialog(this, "Recuerde que el campo mesa solo admite numeros enteros. ");
+        } catch (NullPointerException ex) {
+            JOptionPane.showMessageDialog(this, "Fecha vacia");
         }
-        
     }//GEN-LAST:event_jButton2ActionPerformed
 
 
@@ -252,5 +254,11 @@ public void cabecera(){
     }
       }
 
+      public void LlenarTabla(){
+          PedidoDataBase p=new PedidoDataBase();
+          for (Pedido o: p.listarPedido()) {
+                modelo.addRow(new Object[]{o.getIdpedido(),o.getIdmesa().getNumero(),o.getNombre(),o.getFecha(),o.getHora(),o.getImporte(),o.isCobrada()});
+            }
+      }
 
 }

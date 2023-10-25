@@ -325,7 +325,7 @@ public class menuproducto extends javax.swing.JInternalFrame {
                 Producto produ=prod.buscarProducto(pro);
                 int cant = Integer.parseInt(jcantidad.getText());
                 double sub = Double.parseDouble(jttotal.getText());
-                if (produ.getStock() > cant) {
+                if (produ.getStock() >= cant) {
                     if (cant != 0 && sub != 0) {
                         PedidoProd pp = new PedidoProd(pe, produ, cant, sub, true);
                         ppd.guardarPedido(pp);
@@ -345,9 +345,9 @@ public class menuproducto extends javax.swing.JInternalFrame {
                 JOptionPane.showMessageDialog(this, "Usted debe seleccionar un producto");
             }
         } catch (NullPointerException ex) {
-            JOptionPane.showMessageDialog(this, "valor incorrecto");
+            JOptionPane.showMessageDialog(this, "Ingrese un numero entero");
         } catch (NumberFormatException ey) {
-            JOptionPane.showMessageDialog(this, "valor incorrecto");
+            JOptionPane.showMessageDialog(this, "Ingrese un numero entero");
         }
     }//GEN-LAST:event_jButton2ActionPerformed
 
@@ -410,10 +410,16 @@ public class menuproducto extends javax.swing.JInternalFrame {
     }
 
     private void llenarTabla() {
+        String t;
         ProductoDataBase pd=new ProductoDataBase();
         for (Producto p : pd.listarProductos()) {
+            if(p.isEstado()){
+                t="Disponible";
+            }else{
+                t="No disponible";
+            }
             modelo.addRow(new Object[]{
-                p.getIdProducto(),p.getNombreProducto(),p.getPrecio(),p.getStock(),p.isEstado()});
+                p.getIdProducto(),p.getNombreProducto(),p.getPrecio(),p.getStock(),t});
         }
     }
     private void comboBox(){

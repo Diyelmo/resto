@@ -22,6 +22,7 @@ private PedidoDataBase pd;
         initComponents();
         modificarTabla();
         borrarlista();
+        LlenarTabla();
         pd=new PedidoDataBase();
     }
 
@@ -127,13 +128,14 @@ private PedidoDataBase pd;
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        borrarlista();
+       
         try {
             SimpleDateFormat f = new SimpleDateFormat("dd-MM-yyyy");
             String fech = f.format(jDateChooser1.getDate());
             LocalDate fechan = LocalDate.parse(fech, DateTimeFormatter.ofPattern("dd-MM-yyyy"));
             int dia = fechan.getDayOfMonth();
             String x = jTextField1.getText();
+             borrarlista();
             for (Pedido p : pd.listarXDia(x)) {
                 if (dia == p.getFecha().getDayOfMonth()) {
                     modelo.addRow(new Object[]{
@@ -141,9 +143,9 @@ private PedidoDataBase pd;
                 }
             }
         } catch (NullPointerException ex) {
-            JOptionPane.showMessageDialog(this, "vacio");
+            JOptionPane.showMessageDialog(this, "fecha vacia");
         } catch (NumberFormatException ey) {
-            JOptionPane.showMessageDialog(this, "valor incorrecto");
+            JOptionPane.showMessageDialog(this, "Ingrese un numero entero");
         }
     }//GEN-LAST:event_jButton2ActionPerformed
 
@@ -180,4 +182,10 @@ private PedidoDataBase pd;
              modelo.removeRow(i);
             }
     }
+    public void LlenarTabla(){
+          PedidoDataBase p=new PedidoDataBase();
+          for (Pedido o: p.listarPedido()) {
+                modelo.addRow(new Object[]{o.getIdpedido(),o.getIdmesa().getNumero(),o.getNombre(),o.getFecha(),o.getHora(),o.getImporte(),o.isCobrada()});
+            }
+      }
 }

@@ -237,15 +237,8 @@ public class obtenerTotal extends javax.swing.JInternalFrame {
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
         try {
-            double total=0;
-            double sub=0;
-            Pedido pe=(Pedido)jComboBox1.getSelectedItem();
-            int filas=jTable1.getRowCount()-1;
-            for (int i = 0; i <= filas; i++) {
-                sub=(double)modelo.getValueAt(i, 4);
-                total=total+sub;                
-            }
-            jTextField2.setText(total+"");
+            Double total=Double.valueOf(jTextField2.getText());
+            Pedido pe=(Pedido)jComboBox1.getSelectedItem();    
             ped.ObtenerImporte(pe.getIdpedido(), total);
         } catch (NullPointerException ex) {
             JOptionPane.showMessageDialog(this, "Vacio");
@@ -300,12 +293,16 @@ public class obtenerTotal extends javax.swing.JInternalFrame {
     }
 
     private void llenarTabla() {
+        double to=0;
         PedidoProdDataBase pd=new PedidoProdDataBase();
         Pedido pe=(Pedido)jComboBox1.getSelectedItem();        
         for (PedidoProd p : pd.obtenerLista(pe.getIdpedido())) {
             modelo.addRow(new Object[]{
                 p.getIdPedidoProd(),p.getIdPedido(),p.getIdProducto(),p.getCantidad(),p.getSubtotal(),p.isEstado()});
+            to=to+p.getSubtotal();
         }
+        jTextField2.setText(to+"");
+    
     }
     private void comboBox(){
         PedidoDataBase pd= new PedidoDataBase();
