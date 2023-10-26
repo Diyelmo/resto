@@ -331,7 +331,7 @@ public class menuproducto extends javax.swing.JInternalFrame {
 //                double sub = Double.parseDouble(jttotal.getText());
                 if (produ.getStock() >= cant) {
                     if (cant != 0 && precio != 0) {
-                        PedidoProd pp = new PedidoProd(pe, produ, cant, precio, true);
+                        PedidoProd pp = new PedidoProd(pe, produ, cant, precio*cant, true);
                         ppd.guardarPedido(pp);
                         int stock = produ.getStock() - cant;
                         prod.actualizararStock(stock, produ.getIdProducto());

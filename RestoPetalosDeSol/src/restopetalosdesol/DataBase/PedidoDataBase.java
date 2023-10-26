@@ -40,7 +40,7 @@ public class PedidoDataBase {
                 
                 p=new Pedido();
                 p.setIdpedido(rs.getInt("idPedido"));
-                Mesa m= md.buscarMesa(rs.getInt("idMesa"));
+                Mesa m= md.buscarIDMesa(rs.getInt("idMesa"));
                 p.setIdmesa(m);
                 p.setNombre(rs.getString("nombre_mesero"));
                 p.setFecha(rs.getDate("fecha").toLocalDate());

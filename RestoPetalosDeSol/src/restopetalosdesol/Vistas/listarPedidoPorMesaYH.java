@@ -244,7 +244,10 @@ private DefaultTableModel modelo= new DefaultTableModel(){
             }
         }
          }catch(DateTimeParseException e){
-            JOptionPane.showMessageDialog(this, "Recuerde que las horas deben completarse con el siguiente formato hh:mm:ss ");
+            JOptionPane.showMessageDialog(this, "Recuerde que las horas deben completarse con el siguiente formato hh:mm ");
+        }catch(NullPointerException e){
+            JOptionPane.showMessageDialog(this, "Llene los campos vacios.");
+            llenarTabla();
         }
             
             

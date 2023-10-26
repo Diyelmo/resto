@@ -100,7 +100,7 @@ public class Pedido {
 
     @Override
     public String toString() {
-        return "Pedido Nr: "+getIdpedido()+"  / Mesa Nr: "+getIdmesa().getNumero()+"  / Mesero: "+getNombre()+"  / Pedido realizado el: "+getFecha()+"  / a la hora: "+getHora();
+        return "Pedido Nr: "+getIdpedido()+"  / Mesa Nr: "+getIdmesa()+"  / Mesero: "+getNombre()+"  / Pedido realizado el: "+getFecha()+"  / a la hora: "+getHora();
     }    
 
 }

@@ -162,12 +162,7 @@ private DefaultTableModel modelo= new DefaultTableModel(){
         try{
         Date date=jDateChooser2.getDate();
         
-       localDate= date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-     
-           
-        }catch(NullPointerException e){
-            JOptionPane.showMessageDialog(this, "No ha ingresado una fecha.");
-        }
+       localDate= date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();        
         PedidoDataBase data=new PedidoDataBase(); 
         int control=0;
         for (Pedido pd : data.listarPedido()) {
@@ -183,7 +178,10 @@ private DefaultTableModel modelo= new DefaultTableModel(){
             }
         if(control==0) {JOptionPane.showMessageDialog(this, "Datos no encontrados para la fecha seleccionada.");
         }
-    
+    }catch(NullPointerException e){
+            JOptionPane.showMessageDialog(this, "No ha ingresado una fecha.");
+            LlenarTabla();
+        }
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -194,9 +192,7 @@ private DefaultTableModel modelo= new DefaultTableModel(){
        localDate= date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
      
            
-        }catch(NullPointerException e){
-            JOptionPane.showMessageDialog(this, "No ha ingresado una fecha.");
-        }
+        
         PedidoDataBase data=new PedidoDataBase(); 
         double total=0;
         for (Pedido pd : data.listarPedido()) {
@@ -212,7 +208,9 @@ private DefaultTableModel modelo= new DefaultTableModel(){
             jtTotal.setText(String.valueOf(total));
        
         }
-    
+    }catch(NullPointerException e){
+            JOptionPane.showMessageDialog(this, "No ha ingresado una fecha.");
+        }
           
     }//GEN-LAST:event_jButton2ActionPerformed
 
@@ -222,7 +220,7 @@ private DefaultTableModel modelo= new DefaultTableModel(){
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
       borrarlista();
-      jtTotal.setText("");
+      LlenarTabla();
     }//GEN-LAST:event_jButton4ActionPerformed
 
 
@@ -253,7 +251,13 @@ public void cabecera(){
         jTable1.setModel(modelo);
     }
     
-   
+    public void LlenarTabla(){
+          PedidoDataBase p=new PedidoDataBase();
+          for (Pedido o: p.listarPedido()) {
+                modelo.addRow(new Object[]{o.getIdpedido(),o.getIdmesa().getNumero(),o.getNombre(),o.getFecha(),o.getHora(),o.getImporte(),o.isCobrada()});
+      }
+          
+    }
    
 
       public void borrarlista(){
