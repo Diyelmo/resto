@@ -25,18 +25,16 @@ public class ProductoDataBase {
     }
 
     public void agregarProducto(Producto p) {
-        String sql = "INSERT INTO producto ( idProducto, nombreProducto, precio, stock, estado) "
-                + "VALUES (?,?,?,?,?);";
+        String sql = "INSERT INTO producto ( nombreProducto, precio, stock, estado) "
+                + "VALUES (?,?,?,?);";
 
         try {
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 
-            ps.setInt(1, p.getIdProducto());
-            ps.setString(2, p.getNombreProducto());
-            ps.setDouble(3, p.getPrecio());
-            ps.setInt(4, p.getStock());
-            ps.setBoolean(5, true);
-
+            ps.setString(1, p.getNombreProducto());
+            ps.setDouble(2, p.getPrecio());
+            ps.setInt(3, p.getStock());
+            ps.setBoolean(4, true);
             ps.executeUpdate();
 
             ResultSet rs = ps.getGeneratedKeys();
@@ -78,6 +76,31 @@ public class ProductoDataBase {
         }
         return p;
     }
+    public Producto buscarProducto(String nombre){
+        String sql="select * from producto where nombreProducto=? ";
+        Producto p=null;
+        try {           
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setString(1, nombre);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                
+                p=new Producto();
+                p.setIdProducto(rs.getInt("idProducto"));
+                p.setNombreProducto(rs.getString("nombreProducto"));
+                p.setPrecio(rs.getDouble("precio"));
+                p.setStock(rs.getInt("stock"));
+                p.setEstado(rs.getBoolean("estado"));
+                
+            }else{
+                JOptionPane.showMessageDialog(null, " No existe ese Producto.");
+            }
+            ps.close();
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, " Error al acceder a la tabla Producto "+e.getMessage());
+        }
+        return p;
+    }
     
     public void eliminarProducto(int id) {
         String sql = "UPDATE producto SET estado = 0 WHERE idProducto = ? ";
@@ -91,6 +114,27 @@ public class ProductoDataBase {
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, " Error al acceder a la tabla Producto");
         }
+    }
+    public void modificarProducto(Producto p, String s) {
+        String sql="UPDATE `producto` SET `nombreProducto`=?,"
+                    + "`precio`=?,`stock`=?,`estado`=? where nombreProducto=?";
+            try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setString(1, p.getNombreProducto());
+            ps.setDouble(2, p.getPrecio());
+            ps.setInt(3,p.getStock());
+            ps.setBoolean(4, p.isEstado());
+            ps.setString(5,s);
+            int exito = ps.executeUpdate();
+
+            if (exito == 1) {
+                //JOptionPane.shMessageDialog(null, "Stock actualizado");
+            }
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla producto" + ex.getMessage());
+        }
+           
     }
 
     public void actualizararStock(int s ,int p) {
@@ -126,6 +170,33 @@ public class ProductoDataBase {
                 prod.setPrecio(rs.getDouble("precio"));
                 prod.setStock(rs.getInt("stock"));
                 prod.setEstado(rs.getBoolean("estado"));
+                
+                productos.add(prod);
+            }
+            ps.close();
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla producto" + ex.getMessage());
+        }
+        return productos;
+
+    }
+    public List<Producto> listarProductos2() {
+        String sql = "SELECT * FROM producto  ";
+        List<Producto> productos = new ArrayList<Producto>();
+
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                Producto prod = new Producto();
+                prod.setIdProducto(rs.getInt("idProducto"));
+                prod.setNombreProducto(rs.getString("nombreProducto"));
+                prod.setPrecio(rs.getDouble("precio"));
+                prod.setStock(rs.getInt("stock"));
+                prod.setEstado(true);
                 
                 productos.add(prod);
             }
