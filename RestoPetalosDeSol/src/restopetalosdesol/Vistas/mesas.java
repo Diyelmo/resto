@@ -20,6 +20,8 @@ import restopetalosdesol.Entidades.Pedido;
 import java.time.ZoneId;
 import java.util.Calendar;
 import java.util.Date;
+import restopetalosdesol.DataBase.meseroDataBase;
+import restopetalosdesol.Entidades.Mesero;
 
 /**
  *
@@ -43,6 +45,7 @@ public class mesas extends javax.swing.JInternalFrame {
         initComponents();
         modificarTabla();
         llenarTabla();
+        comboBox();
         md=new MesaDataBase();
         pd=new PedidoDataBase();
         ZoneId defaultZoneId = ZoneId.systemDefault();
@@ -77,7 +80,6 @@ public class mesas extends javax.swing.JInternalFrame {
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jDateChooser1 = new com.toedter.calendar.JDateChooser();
-        jtmesero = new javax.swing.JTextField();
         jPanel2 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
@@ -86,6 +88,7 @@ public class mesas extends javax.swing.JInternalFrame {
         jLabel3 = new javax.swing.JLabel();
         jPanel6 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
+        jComboBox1 = new javax.swing.JComboBox<>();
 
         jTable1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, java.awt.Color.white, null, null, java.awt.Color.black));
         jTable1.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
@@ -104,7 +107,6 @@ public class mesas extends javax.swing.JInternalFrame {
 
         jthora.setBackground(new java.awt.Color(204, 204, 204));
         jthora.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, java.awt.Color.white, null, null, java.awt.Color.black));
-        jthora.setEnabled(false);
 
         jButton1.setBackground(new java.awt.Color(0, 0, 0));
         jButton1.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
@@ -128,9 +130,6 @@ public class mesas extends javax.swing.JInternalFrame {
 
         jDateChooser1.setBackground(new java.awt.Color(204, 204, 204));
         jDateChooser1.setEnabled(false);
-
-        jtmesero.setBackground(new java.awt.Color(204, 204, 204));
-        jtmesero.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, java.awt.Color.white, null, null, java.awt.Color.black));
 
         jPanel2.setBackground(new java.awt.Color(204, 204, 204));
 
@@ -226,34 +225,31 @@ public class mesas extends javax.swing.JInternalFrame {
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(236, 236, 236))
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(36, 36, 36)
+                .addComponent(jButton2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(48, 48, 48))
+            .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(36, 36, 36)
-                        .addComponent(jButton2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(48, 48, 48))
+                        .addGap(20, 20, 20)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(18, 18, 18)
+                        .addComponent(jthora, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(180, 180, 180)
+                        .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(20, 20, 20)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(20, 20, 20)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addGap(18, 18, 18)
-                                .addComponent(jthora, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(180, 180, 180)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jtmesero, javax.swing.GroupLayout.PREFERRED_SIZE, 316, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 551, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(52, 52, 52)
+                                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 551, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(20, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -266,8 +262,8 @@ public class mesas extends javax.swing.JInternalFrame {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jtmesero, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
+                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(24, 24, 24)
                         .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(12, 12, 12)
                         .addComponent(jthora, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -310,14 +306,14 @@ public class mesas extends javax.swing.JInternalFrame {
         if(fila!=-1){            
             int idme=(Integer)modelo.getValueAt(fila, 1);
             Mesa m = md.buscarMesa(idme);
-            String mesero=jtmesero.getText();
+            Mesero mesero= (Mesero) jComboBox1.getSelectedItem();
             //SimpleDateFormat f=new SimpleDateFormat("dd-MM-yyyy");
             //String fech=f.format(jDateChooser1.getDate());
             LocalDate fecha= LocalDate.now();
             LocalTime hora=LocalTime.now();
             if (hora.isAfter( LocalTime.of(7, 59)) && hora.isBefore(LocalTime.of(23, 59))) {
                 if (m.isEstado() == false) {
-                    Pedido p = new Pedido(m, mesero, fecha, hora, 0, false);
+                    Pedido p = new Pedido(m, mesero.getNombre(), fecha, hora, 0, false);
                     pd.guardarPedido(p);
                     int num = m.getNumero();
                     md.OcuparMesa(num);
@@ -343,6 +339,7 @@ public class mesas extends javax.swing.JInternalFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JComboBox<Mesero> jComboBox1;
     private com.toedter.calendar.JDateChooser jDateChooser1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -356,7 +353,6 @@ public class mesas extends javax.swing.JInternalFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     private javax.swing.JTextField jthora;
-    private javax.swing.JTextField jtmesero;
     // End of variables declaration//GEN-END:variables
 
     private void modificarTabla(){
@@ -372,18 +368,22 @@ public class mesas extends javax.swing.JInternalFrame {
              modelo.removeRow(i);
             }
     }
-    private void llenarTabla() {
+     private void llenarTabla() {
         borrarlista();
-        String t;
         MesaDataBase md=new MesaDataBase();
         for (Mesa m : md.listarMesas()) {
             if(m.isEstado()){
-                t="Ocupado";
-            }else{
-                t="Libre";
-            }
             modelo.addRow(new Object[]{
-                m.getIdMesa(), m.getNumero(), t, m.getCapacidad()});
+                m.getIdMesa(), m.getNumero(), "Ocupada", m.getCapacidad()});
+        }else {modelo.addRow(new Object[]{m.getIdMesa(), m.getNumero(), "Libre", m.getCapacidad()});}
+        }
+    }
+     
+     private void comboBox(){
+        meseroDataBase pd= new meseroDataBase();
+        for (Mesero item : pd.listarMeseros()) {
+           
+            jComboBox1.addItem(item);
         }
     }
 }

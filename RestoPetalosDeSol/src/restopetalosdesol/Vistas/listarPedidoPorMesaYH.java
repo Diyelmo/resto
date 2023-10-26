@@ -6,9 +6,11 @@
 package restopetalosdesol.Vistas;
 
 import java.sql.Connection;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Date;
@@ -34,7 +36,7 @@ private DefaultTableModel modelo= new DefaultTableModel(){
     public listarPedidoPorMesaYH() {
         initComponents();
         cabecera();
-        LlenarTabla();
+        llenarTabla();
     }
 
     /**
@@ -59,6 +61,7 @@ private DefaultTableModel modelo= new DefaultTableModel(){
         jLabel5 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
 
         jLabel1.setFont(new java.awt.Font("DialogInput", 0, 18)); // NOI18N
         jLabel1.setText("Listar Pedidos Por Mesa Entre Horas");
@@ -98,6 +101,18 @@ private DefaultTableModel modelo= new DefaultTableModel(){
         });
 
         jButton2.setText("Llenar Tabla");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
+        jButton3.setText("Reiniciar");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -112,6 +127,8 @@ private DefaultTableModel modelo= new DefaultTableModel(){
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(jButton2)
                         .addGap(18, 18, 18)
+                        .addComponent(jButton3)
+                        .addGap(42, 42, 42)
                         .addComponent(jButton1)))
                 .addContainerGap())
             .addGroup(layout.createSequentialGroup()
@@ -167,7 +184,8 @@ private DefaultTableModel modelo= new DefaultTableModel(){
                 .addGap(30, 30, 30)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
-                    .addComponent(jButton2))
+                    .addComponent(jButton2)
+                    .addComponent(jButton3))
                 .addContainerGap())
         );
 
@@ -185,41 +203,67 @@ private DefaultTableModel modelo= new DefaultTableModel(){
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         
-        try{
-        LocalTime horLlegada=LocalTime.parse(jtLlegada.getText());
-        LocalTime horSalida=LocalTime.parse(jtSalida.getText());
-       
-        int nMesa= Integer.parseInt(jtMesa.getText());
-       
-        Date dia=jdcDia.getDate();
-        LocalDate d = dia.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-        Pedido pedido=new Pedido();
-        pedido.setHora(horLlegada);
-        PedidoDataBase p=new PedidoDataBase();
-        
         borrarlista();
-        for (Pedido o: p.listarPedido()) {
-            if(o.getIdmesa().getNumero()==nMesa && o.getFecha().equals(d)){
-            if(o.getHora().equals(pedido.getHora())|| o.getHora().isAfter(pedido.getHora()) && o.getHora().isBefore(horSalida)  ) {
-                modelo.addRow(new Object[]{o.getIdpedido(),o.getIdmesa().getNumero(),o.getNombre(),o.getFecha(),o.getHora(),o.getImporte(),o.isCobrada()});
+        
+        try {
+            SimpleDateFormat f = new SimpleDateFormat("dd-MM-yyyy");
+            String fech = f.format(jdcDia.getDate());
+            
+            LocalDate fecha = LocalDate.parse(fech, DateTimeFormatter.ofPattern("dd-MM-yyyy"));
+           
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
+             LocalTime llegada = LocalTime.parse(jtLlegada.getText(), formatter);
+            
+            
+         
+             LocalTime salida = LocalTime.parse(jtSalida.getText(), formatter);
+            
+            
+            
+           int nMesa= Integer.parseInt(jtMesa.getText());
+           
+           Pedido pedido=new Pedido();
+           
+      
+       
+      PedidoDataBase p=new PedidoDataBase();
+      
+      for (Pedido o: p.listarPedido()) {
+         
+            if(o.getIdmesa().getNumero()==nMesa && o.getFecha().equals(fecha) && o.isCobrada()){
+            if(o.getHora().equals(llegada)|| (o.getHora().isAfter(llegada) && o.getHora().isBefore(salida))  ) {
+                modelo.addRow(new Object[]{o.getIdpedido(),o.getIdmesa().getNumero(),o.getNombre(),o.getFecha(),o.getHora(),o.getImporte(),"Pago realizado"});
             }
                     
             }    
-            
+             if(o.getIdmesa().getNumero()==nMesa && o.getFecha().equals(fecha) && !o.isCobrada()){
+            if(o.getHora().equals(llegada)|| (o.getHora().isAfter(llegada) && o.getHora().isBefore(salida))  ) {
+                modelo.addRow(new Object[]{o.getIdpedido(),o.getIdmesa().getNumero(),o.getNombre(),o.getFecha(),o.getHora(),o.getImporte(),"Pago pendiente"});
+            }
+                    
+            }
         }
-        }catch(DateTimeParseException e){
+         }catch(DateTimeParseException e){
             JOptionPane.showMessageDialog(this, "Recuerde que las horas deben completarse con el siguiente formato hh:mm:ss ");
-        } catch(NumberFormatException e){
-            JOptionPane.showMessageDialog(this, "Recuerde que el campo mesa solo admite numeros enteros. ");
-        } catch (NullPointerException ex) {
-            JOptionPane.showMessageDialog(this, "Fecha vacia");
         }
+            
+            
+         
+        
+            
+       
+            
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+         llenarTabla();
+    }//GEN-LAST:event_jButton3ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -254,11 +298,22 @@ public void cabecera(){
     }
       }
 
-      public void LlenarTabla(){
-          PedidoDataBase p=new PedidoDataBase();
-          for (Pedido o: p.listarPedido()) {
-                modelo.addRow(new Object[]{o.getIdpedido(),o.getIdmesa().getNumero(),o.getNombre(),o.getFecha(),o.getHora(),o.getImporte(),o.isCobrada()});
-            }
-      }
+      private void llenarTabla() {
+        PedidoDataBase pd=new PedidoDataBase();
+        jtLlegada.setText("");
+        jtSalida.setText("");
+        jtMesa.setText("");
+        jdcDia.setDate(null);
+        borrarlista();
+        for (Pedido p : pd.listarPedido()) {
+            if( p.isCobrada()){
+            modelo.addRow(new Object[]{
+                p.getIdpedido(),p.getIdmesa().getNumero(),p.getNombre(),p.getFecha(),p.getHora(),p.getImporte(),"Pago realizado"});
+        }
+            if( !p.isCobrada()){
+            modelo.addRow(new Object[]{
+                p.getIdpedido(),p.getIdmesa().getNumero(),p.getNombre(),p.getFecha(),p.getHora(),p.getImporte(),"Pago pendiente"});
+        }
+    }}
 
 }

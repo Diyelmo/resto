@@ -28,9 +28,11 @@ public class menuproducto extends javax.swing.JInternalFrame {
     
     public menuproducto() {
         initComponents();
+        comboBox2();
         modificarTabla();
         llenarTabla();
         comboBox();
+        
         ppd=new PedidoProdDataBase();
         ped=new PedidoDataBase();
         prod=new ProductoDataBase();
@@ -53,7 +55,6 @@ public class menuproducto extends javax.swing.JInternalFrame {
         jButton3 = new javax.swing.JButton();
         jttotal = new javax.swing.JTextField();
         jbtotal = new javax.swing.JButton();
-        jcantidad = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jComboBox1 = new javax.swing.JComboBox<>();
@@ -65,6 +66,7 @@ public class menuproducto extends javax.swing.JInternalFrame {
         jLabel2 = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
+        jComboBox2 = new javax.swing.JComboBox<>();
 
         setBackground(new java.awt.Color(0, 0, 0));
         setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, null, new java.awt.Color(255, 255, 255), java.awt.Color.black, null));
@@ -106,11 +108,6 @@ public class menuproducto extends javax.swing.JInternalFrame {
                 jbtotalActionPerformed(evt);
             }
         });
-
-        jcantidad.setBackground(new java.awt.Color(204, 204, 204));
-        jcantidad.setFont(new java.awt.Font("Trebuchet MS", 1, 11)); // NOI18N
-        jcantidad.setText("0");
-        jcantidad.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, java.awt.Color.white, null, null, java.awt.Color.black));
 
         jTable1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, java.awt.Color.white, null, null, java.awt.Color.black));
         jTable1.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
@@ -227,6 +224,12 @@ public class menuproducto extends javax.swing.JInternalFrame {
                 .addContainerGap())
         );
 
+        jComboBox2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox2ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -251,8 +254,8 @@ public class menuproducto extends javax.swing.JInternalFrame {
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(jPanel1Layout.createSequentialGroup()
                                         .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(1, 1, 1)
-                                        .addComponent(jcantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGap(37, 37, 37)
+                                        .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addComponent(jButton2))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -265,7 +268,7 @@ public class menuproducto extends javax.swing.JInternalFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(322, 322, 322)
                         .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(22, Short.MAX_VALUE))
+                .addContainerGap(26, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -283,17 +286,17 @@ public class menuproducto extends javax.swing.JInternalFrame {
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 63, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 92, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(jttotal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jbtotal))
-                            .addComponent(jcantidad, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jttotal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jbtotal))
                         .addGap(18, 18, 18))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(8, 8, 8)))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton2)
@@ -322,17 +325,18 @@ public class menuproducto extends javax.swing.JInternalFrame {
             if (fila != -1) {
                 Pedido pe = (Pedido) jComboBox1.getSelectedItem();
                 int pro = (int) modelo.getValueAt(fila, 0);
+                double precio=(double)modelo.getValueAt(fila, 2);
                 Producto produ=prod.buscarProducto(pro);
-                int cant = Integer.parseInt(jcantidad.getText());
-                double sub = Double.parseDouble(jttotal.getText());
+                int cant = Integer.parseInt(jComboBox2.getSelectedItem().toString());
+//                double sub = Double.parseDouble(jttotal.getText());
                 if (produ.getStock() >= cant) {
-                    if (cant != 0 && sub != 0) {
-                        PedidoProd pp = new PedidoProd(pe, produ, cant, sub, true);
+                    if (cant != 0 && precio != 0) {
+                        PedidoProd pp = new PedidoProd(pe, produ, cant, precio, true);
                         ppd.guardarPedido(pp);
                         int stock = produ.getStock() - cant;
                         prod.actualizararStock(stock, produ.getIdProducto());
-                        jcantidad.setText(""+0);
-                        jttotal.setText(""+0);
+//                        jcantidad.setText(""+0);
+                        jttotal.setText(""+cant*precio);
                         borrarlista();
                         llenarTabla();
                     } else {
@@ -342,7 +346,7 @@ public class menuproducto extends javax.swing.JInternalFrame {
                     JOptionPane.showMessageDialog(this, "Stock insuficiente");
                 }
             } else {
-                JOptionPane.showMessageDialog(this, "Usted debe seleccionar un producto");
+//                JOptionPane.showMessageDialog(this, "Usted debe seleccionar un producto");
             }
         } catch (NullPointerException ex) {
             JOptionPane.showMessageDialog(this, "Ingrese un numero entero");
@@ -353,21 +357,21 @@ public class menuproducto extends javax.swing.JInternalFrame {
 
     private void jbtotalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtotalActionPerformed
         // TODO add your handling code here:
-        try{      
-        int cant=0;
-        int fila = jTable1.getSelectedRow();
-        if(fila!=-1){            
-            double precio=(double)modelo.getValueAt(fila, 2);
-            cant=Integer.parseInt(jcantidad.getText());
-            jttotal.setText(precio*cant+"");
-        }else{
-            JOptionPane.showMessageDialog(this, "Usted debe seleccionar un pedido");
-        }
-        }catch(NullPointerException ex){
-            JOptionPane.showMessageDialog(this, "valor incorrecto");
-        }catch(NumberFormatException ey){
-            JOptionPane.showMessageDialog(this, "valor incorrecto");
-        }
+//        try{      
+//        int cant=0;
+//        int fila = jTable1.getSelectedRow();
+//        if(fila!=-1){            
+//            double precio=(double)modelo.getValueAt(fila, 2);
+//            cant=Integer.parseInt(jcantidad.getText());
+//            jttotal.setText(precio*cant+"");
+//        }else{
+//            JOptionPane.showMessageDialog(this, "Usted debe seleccionar un pedido");
+//        }
+//        }catch(NullPointerException ex){
+//            JOptionPane.showMessageDialog(this, "valor incorrecto");
+//        }catch(NumberFormatException ey){
+//            JOptionPane.showMessageDialog(this, "valor incorrecto");
+//        }
     }//GEN-LAST:event_jbtotalActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
@@ -379,11 +383,33 @@ public class menuproducto extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jComboBox1ActionPerformed
 
+    private void jComboBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox2ActionPerformed
+        
+            int fila = jTable1.getSelectedRow();
+            if (fila != -1) {
+                Pedido pe = (Pedido) jComboBox1.getSelectedItem();
+                int pro = (int) modelo.getValueAt(fila, 0);
+                double precio=(double)modelo.getValueAt(fila, 2);
+                Producto produ=prod.buscarProducto(pro);
+                int cant = Integer.parseInt(jComboBox2.getSelectedItem().toString());
+                jttotal.setText(""+cant*precio);
+            
+            } else {
+//               JOptionPane.showMessageDialog(this, "Usted debe seleccionar un producto");
+            }
+        
+            
+        
+        
+    
+    }//GEN-LAST:event_jComboBox2ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JComboBox<Pedido> jComboBox1;
+    private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -396,10 +422,26 @@ public class menuproducto extends javax.swing.JInternalFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     private javax.swing.JButton jbtotal;
-    private javax.swing.JTextField jcantidad;
     private javax.swing.JTextField jttotal;
     // End of variables declaration//GEN-END:variables
 
+    private void comboBox2(){
+        ProductoDataBase pd= new ProductoDataBase();
+        int i=0;
+        for (Producto p : pd.listarProductos2()) {
+            for (Producto o : pd.listarProductos2()) {
+                if(p.getStock()>o.getStock()){
+                    i=p.getStock();
+                }
+            }
+        }
+        for (int j = 0; j <= i; j++) {
+            jComboBox2.addItem(""+j);
+        }
+    }
+    
+    
+    
     private void modificarTabla(){
         modelo.addColumn("ID");
         modelo.addColumn("Nombre");

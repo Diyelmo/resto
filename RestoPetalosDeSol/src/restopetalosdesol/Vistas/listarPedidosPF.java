@@ -82,12 +82,22 @@ private DefaultTableModel modelo= new DefaultTableModel(){
         });
 
         jButton2.setText("Calcular Total");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jtTotal.setEditable(false);
 
         jLabel5.setText("Total Recaudado");
 
         jButton3.setText("Llenar Tabla");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
