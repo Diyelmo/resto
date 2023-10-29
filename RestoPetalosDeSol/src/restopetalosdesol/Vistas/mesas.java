@@ -43,6 +43,7 @@ public class mesas extends javax.swing.JInternalFrame {
     
     public mesas() {
         initComponents();
+        jthora.setEnabled(false);
         modificarTabla();
         llenarTabla();
         comboBox();

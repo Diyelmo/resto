@@ -33,6 +33,7 @@ private DefaultTableModel modelo= new DefaultTableModel(){
         
         initComponents();
         cabecera();
+        LlenarTabla();
         
     }
 
@@ -254,9 +255,10 @@ public void cabecera(){
     public void LlenarTabla(){
           PedidoDataBase p=new PedidoDataBase();
           for (Pedido o: p.listarPedido()) {
-                modelo.addRow(new Object[]{o.getIdpedido(),o.getIdmesa().getNumero(),o.getNombre(),o.getFecha(),o.getHora(),o.getImporte(),o.isCobrada()});
-      }
-          
+              if(o.isCobrada()){
+                modelo.addRow(new Object[]{o.getIdpedido(),o.getIdmesa().getNumero(),o.getNombre(),o.getFecha(),o.getHora(),o.getImporte(),"Pago realizado"});
+      }else {modelo.addRow(new Object[]{o.getIdpedido(),o.getIdmesa().getNumero(),o.getNombre(),o.getFecha(),o.getHora(),o.getImporte(),"Pago pendiente"});}
+          }    
     }
    
 
