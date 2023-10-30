@@ -81,7 +81,7 @@ public class PedidoProdDataBase {
     }
     
     public void cancelarPedido(int id) {
-        String sql = "UPDATE pedidoProducto SET estado = 0 WHERE idPedido_Prod = ? ";
+        String sql = "UPDATE pedidoProducto SET estado = 0 WHERE idPedidoProd = ? ";
         try {           
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setInt(1, id);

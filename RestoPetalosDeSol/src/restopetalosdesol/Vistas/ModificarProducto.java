@@ -306,6 +306,7 @@ public class ModificarProducto extends javax.swing.JInternalFrame {
         jTFNombre.setText("");
         jTFPrecio.setText("");
         jTFStock.setText("");
+        jTFNuevoNombre.setText("");
         jRBEstado.setSelected(false);
     }//GEN-LAST:event_jBLimpiarActionPerformed
 
@@ -323,7 +324,7 @@ public class ModificarProducto extends javax.swing.JInternalFrame {
             jTFPrecio.setText(p.getPrecio()+"");
             jTFStock.setText(p.getStock()+"");
             jRBEstado.setSelected(p.isEstado());
-
+            jTFNuevoNombre.setText(p.getNombreProducto());
         }catch(NumberFormatException nf){
             JOptionPane.showMessageDialog(this, "Debe ingresar un numero entero");
         }catch(NullPointerException e){
